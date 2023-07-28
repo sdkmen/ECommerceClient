@@ -20,13 +20,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
   }
 
   @Output() createdProduct : EventEmitter<Create_Product> = new EventEmitter();
-  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
-    action: "upload",
-    controller: "products",
-    explanation: "Drag or drop images",
-    isAdminPage: true,
-    accept: ".png, .jpg, .jpeg, .svg"
-  };
+ 
 
 
   create(name: HTMLInputElement, stock: HTMLInputElement, price: HTMLInputElement){
