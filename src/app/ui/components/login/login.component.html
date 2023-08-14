@@ -13,6 +13,7 @@
                 <input #txtPassword type="password" class="form-control" id="password" placeholder="Password">
             </div>
             <br>
+            <asl-google-signin-button type='icon' size='medium'></asl-google-signin-button>
             <button type="submit" class="btn btn-primary"
                 (click)="login(txtUsernameOrEmail.value, txtPassword.value)">Log in</button>
         </div>
