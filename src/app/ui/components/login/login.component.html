@@ -12,8 +12,12 @@
                 <label for="password" class="form-label">Password</label>
                 <input #txtPassword type="password" class="form-control" id="password" placeholder="Password">
             </div>
-            <br>
-            <asl-google-signin-button type='icon' size='medium'></asl-google-signin-button>
+            <div style="display: flex; margin-bottom: 16px;">
+                <asl-google-signin-button type='icon' size='medium'></asl-google-signin-button>
+                <img src="../../../assets/facebook.png" 
+                style="width: 30px; height: 32px; margin-left: 8px; border-radius: 5px; cursor: pointer;"
+                (click)="facebookLogin()">
+            </div>
             <button type="submit" class="btn btn-primary"
                 (click)="login(txtUsernameOrEmail.value, txtPassword.value)">Log in</button>
         </div>

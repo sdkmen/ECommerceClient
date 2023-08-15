@@ -49,6 +49,10 @@ import { LoginComponent } from './ui/components/login/login.component';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider("217694212586-r4trce67eri3mllu53ilvgr8ci9vih21.apps.googleusercontent.com")
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider("115348721656067")
           }
         ],
         onError: err => console.log(err)
