@@ -1,23 +1,22 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
-import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
-import {MatCardModule} from '@angular/material/card';
-
 
 @NgModule({
-  declarations: [
-    DeleteDialogComponent,
-    SelectProductImageDialogComponent
-  ],
+  declarations: [DeleteDialogComponent, SelectProductImageDialogComponent],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule,
-    FileUploadModule
-  ]
+    MatDialogModule,
+    MatButtonModule,
+    MatCardModule,
+    FileUploadModule,
+  ],
 })
-export class DialogModule { }
+export class DialogModule {}

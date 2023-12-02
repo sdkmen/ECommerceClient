@@ -1,0 +1,16 @@
+.card {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.btn {
+    width: 100%;
+}
+
+.pagination {
+    float: right;
+}

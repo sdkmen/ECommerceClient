@@ -1,6 +1,6 @@
-import { List_Product } from "./list_product";
+import { List_Product } from './list_product';
 
-export class Pagination_Product{
-    totalCount: number;
-    products: List_Product[];
+export class Pagination_Product {
+  totalProductCount: number;
+  products: List_Product[];
 }
