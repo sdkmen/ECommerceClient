@@ -6,7 +6,10 @@ import {
   HttpStatusCode,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, catchError, of } from 'rxjs';
+import { SpinnerType } from 'src/app/base/base.component';
 import {
   CustomToastrService,
   ToastrMessageType,
@@ -20,7 +23,9 @@ import { UserAuthService } from './models/user-auth.service';
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
   constructor(
     private toastrService: CustomToastrService,
-    private userAuthService: UserAuthService
+    private userAuthService: UserAuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   intercept(
@@ -31,17 +36,34 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
       catchError((error) => {
         switch (error.status) {
           case HttpStatusCode.Unauthorized:
-            this.toastrService.message(
-              'unauthorized error caught',
-              'unauthorized',
-              {
-                messageType: ToastrMessageType.Warning,
-                position: ToastrPosition.BottomFullWidth,
-              }
-            );
+            const url = this.router.url;
 
             this.userAuthService
-              .refreshTokenLogin(localStorage.getItem('refreshToken'))
+              .refreshTokenLogin(
+                localStorage.getItem('refreshToken'),
+                (state) => {
+                  if (!state) {
+                    if (url == '/products')
+                      this.toastrService.message(
+                        'You need log in to add to basket',
+                        'Please log in',
+                        {
+                          messageType: ToastrMessageType.Warning,
+                          position: ToastrPosition.TopRight,
+                        }
+                      );
+                    else
+                      this.toastrService.message(
+                        'unauthorized error caught',
+                        'unauthorized',
+                        {
+                          messageType: ToastrMessageType.Warning,
+                          position: ToastrPosition.BottomFullWidth,
+                        }
+                      );
+                  }
+                }
+              )
               .then((data) => {});
             break;
           case HttpStatusCode.InternalServerError:
@@ -77,6 +99,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
             });
             break;
         }
+        this.spinner.hide(SpinnerType.BallAtom);
         return of(error);
       })
     );
