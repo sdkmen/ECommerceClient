@@ -8,9 +8,11 @@ import { FileUploadModule } from '../services/common/file-upload/file-upload.mod
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
+import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
+import { BasketCompleteOrderDialogComponent } from './basket-complete-order-dialog/basket-complete-order-dialog.component';
 
 @NgModule({
-  declarations: [DeleteDialogComponent, SelectProductImageDialogComponent],
+  declarations: [DeleteDialogComponent, SelectProductImageDialogComponent, BasketItemRemoveDialogComponent, BasketCompleteOrderDialogComponent],
   imports: [
     CommonModule,
     MatDialogModule,

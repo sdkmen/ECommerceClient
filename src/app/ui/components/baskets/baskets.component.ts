@@ -5,6 +5,15 @@ import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Basket_Item } from 'src/app/contracts/basket/list_basket_item';
 import { Update_Basket_Item } from 'src/app/contracts/basket/update_basket_item';
 import { Create_Order } from 'src/app/contracts/order/create_order';
+import {
+  BasketCompleteOrderDeleteState,
+  BasketCompleteOrderDialogComponent,
+} from 'src/app/dialogs/basket-complete-order-dialog/basket-complete-order-dialog.component';
+import {
+  BasketItemDeleteState,
+  BasketItemRemoveDialogComponent,
+} from 'src/app/dialogs/basket-item-remove-dialog/basket-item-remove-dialog.component';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { BasketsService } from 'src/app/services/common/models/baskets.service';
 import { OrderService } from 'src/app/services/common/models/order.service';
 import {
@@ -25,6 +34,7 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     spinner: NgxSpinnerService,
     private toastrService: CustomToastrService,
     private basketService: BasketsService,
+    private dialogService: DialogService,
     private orderService: OrderService,
     private router: Router
   ) {
@@ -50,24 +60,38 @@ export class BasketsComponent extends BaseComponent implements OnInit {
   }
 
   async removeBasketItem(basketItemId: string) {
-    this.showSpinner(SpinnerType.BallAtom);
-    await this.basketService.remove(basketItemId);
-    $('.' + basketItemId).fadeOut(1000, () =>
-      this.hideSpinner(SpinnerType.BallAtom)
-    );
+    this.dialogService.openDialog({
+      componentType: BasketItemRemoveDialogComponent,
+      data: BasketItemDeleteState.Yes,
+      afterClosed: async () => {
+        this.showSpinner(SpinnerType.BallAtom);
+        await this.basketService.remove(basketItemId);
+        $('.' + basketItemId).fadeOut(1000, () =>
+          this.hideSpinner(SpinnerType.BallAtom)
+        );
+      },
+    });
   }
 
   async completeOrder() {
-    this.showSpinner(SpinnerType.BallAtom);
-    const order: Create_Order = new Create_Order();
-    order.address = 'Istanbul';
-    order.description = 'Description of order';
-    await this.orderService.create(order);
-    this.hideSpinner(SpinnerType.BallAtom);
-    this.toastrService.message('Order Received', 'Order completed', {
-      messageType: ToastrMessageType.Info,
-      position: ToastrPosition.TopRight,
+    this.dialogService.openDialog({
+      componentType: BasketCompleteOrderDialogComponent,
+      data: BasketCompleteOrderDeleteState.Yes,
+      afterClosed: async () => {
+        this.showSpinner(SpinnerType.BallAtom);
+        const order: Create_Order = new Create_Order();
+        order.address = 'Istanbul';
+        order.description = 'Description of order';
+        await this.orderService.create(order);
+        this.hideSpinner(SpinnerType.BallAtom);
+        this.toastrService.message('Order Received', 'Order completed', {
+          messageType: ToastrMessageType.Info,
+          position: ToastrPosition.TopRight,
+        });
+        this.router.navigate(['/']);
+        $('#basketModal').hide();
+        $('.modal-backdrop').remove();
+      },
     });
-    this.router.navigate(['/']);
   }
 }
