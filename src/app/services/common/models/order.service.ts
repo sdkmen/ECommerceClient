@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Create_Order } from 'src/app/contracts/order/create_order';
+import { List_Order } from 'src/app/contracts/order/list_order';
+import { Pagination_Order } from 'src/app/contracts/pagination_order';
 import { HttpClientService } from '../http-client.service';
 
 @Injectable({
@@ -18,5 +20,26 @@ export class OrderService {
     );
 
     await firstValueFrom(observable);
+  }
+
+  async getAllOrders(
+    page: number = 0,
+    size: number = 5,
+    successCallBack?: () => void,
+    errorCallBack?: (errorMessage: string) => void
+  ): Promise<Pagination_Order> {
+    const observable: Observable<Pagination_Order> = this.httpClientService.get(
+      {
+        controller: 'orders',
+        queryString: `page=${page}&size=${size}`,
+      }
+    );
+
+    const promiseData = firstValueFrom(observable);
+    promiseData
+      .then((value) => successCallBack())
+      .catch((error) => errorCallBack(error));
+
+    return await promiseData;
   }
 }
