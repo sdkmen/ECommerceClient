@@ -13,6 +13,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
+import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SelectProductImageDialogComponent } from './select-product-image-dialog
     BasketItemRemoveDialogComponent,
     BasketCompleteOrderDialogComponent,
     OrderDetailDialogComponent,
+    CompleteOrderDialogComponent,
   ],
   imports: [
     CommonModule,

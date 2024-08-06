@@ -42,6 +42,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     'username',
     'totalPrice',
     'createdDate',
+    'completed',
     'viewDetail',
     'delete',
   ];
