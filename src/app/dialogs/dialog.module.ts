@@ -17,6 +17,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
+import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SelectProductImageDialogComponent } from './select-product-image-dialog
     OrderDetailDialogComponent,
     CompleteOrderDialogComponent,
     AuthorizeMenuDialogComponent,
+    AuthorizeUserDialogComponent,
   ],
   imports: [
     CommonModule,
