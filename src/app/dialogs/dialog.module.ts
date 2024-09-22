@@ -5,6 +5,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
@@ -36,6 +37,7 @@ import { SelectProductImageDialogComponent } from './select-product-image-dialog
     FileUploadModule,
     MatTableModule,
     MatBadgeModule,
+    MatListModule,
   ],
 })
 export class DialogModule {}
