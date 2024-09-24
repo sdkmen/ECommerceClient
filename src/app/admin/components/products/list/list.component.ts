@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Product } from 'src/app/contracts/list_product';
 import { Pagination_Product } from 'src/app/contracts/pagination_product';
+import { QrcodeDialogComponent } from 'src/app/dialogs/qrcode-dialog/qrcode-dialog.component';
 import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import {
   AlertifyService,
@@ -41,6 +42,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     'createdDate',
     'updatedDate',
     'photos',
+    'qrcode',
     'edit',
     'delete',
   ];
@@ -83,5 +85,13 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   async ngOnInit() {
     await this.getProducts();
+  }
+
+  showQRCode(productId: string) {
+    this.dialogService.openDialog({
+      componentType: QrcodeDialogComponent,
+      data: productId,
+      afterClosed: () => {},
+    });
   }
 }
