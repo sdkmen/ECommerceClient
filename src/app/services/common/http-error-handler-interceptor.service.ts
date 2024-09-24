@@ -64,7 +64,16 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
                   }
                 }
               )
-              .then((data) => {});
+              .then((data) => {
+                this.toastrService.message(
+                  'unauthorized error caught',
+                  'unauthorized',
+                  {
+                    messageType: ToastrMessageType.Warning,
+                    position: ToastrPosition.BottomFullWidth,
+                  }
+                );
+              });
             break;
           case HttpStatusCode.InternalServerError:
             this.toastrService.message(
